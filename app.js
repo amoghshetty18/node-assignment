@@ -1,36 +1,21 @@
+const mainDir = require("./util/path");
+
+const path = require("path");
+
 const express = require("express");
 
 const app = express();
 
-app.listen(3000);
+app.use(express.static("public"));
 
-app.use("/user", (req, res) => {
-  console.log("User Route");
-  res.send(`<html lang='en'>
-<head>
-    <title>User</title>
-</head>
-<body>
-    <h1>User Route</h1>
-</body>
-</html>`);
+app.listen(3000, (req, res) => {
+  console.log("Server is up and running");
 });
 
-// app.use("/", (req, res, next) => {
-//   console.log("This is the first middleware");
-//   next();
-// });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "home.html"));
+});
 
-app.use("/", (req, res, next) => {
-  console.log("This is the second middleware");
-  res.send(`
-  <html lang="en">
-<head>
-    <title>Home</title>
-</head>
-<body>
-    <h1>Home Route</h1>
-</body>
-</html>
-  `);
+app.get("/users", (req, res) => {
+  res.sendFile(path.join(mainDir, "views", "users.html"));
 });
