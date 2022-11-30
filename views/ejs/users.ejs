@@ -1,0 +1,8 @@
+<%- include('layouts/head.ejs') %> <%- include('layouts/navigation.ejs') %>
+<h1>Users Page</h1>
+<ul>
+  <% users.forEach(u => { %>
+  <li><%= u.user_name %></li>
+  <% }) %>
+</ul>
+<%- include('layouts/end.ejs')%>
